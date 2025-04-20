@@ -29,29 +29,31 @@ public class Main {
                 new Book(19, "9780735211292", "Atomic Habits"),
                 new Book(20, "9781982137274", "Verity")
         };
-                ;
-        System.out.println("----------------------------------------------------------------------");
-        System.out.println("Hello! Welcome to the library please choose one of the options below!");
-        System.out.println("Hello! enter 1 to Show Available books");
-        System.out.println("Please enter 2 to Show Checked Out Books");
-        System.out.println("Please enter 3 to exit the Library");
 
-        int input = scanner.nextInt();
 
-        while (input != 3){
-            switch(input){
+        boolean programRunning = true;
+
+        while(programRunning) {
+            System.out.println("----------------------------------------------------------------------");
+            System.out.println("Hello! Welcome to the library please choose one of the options below!");
+            System.out.println("Hello! enter 1 to Show Available books");
+            System.out.println("Please enter 2 to Show Checked Out Books");
+            System.out.println("Please enter 3 to exit the Library");
+
+            int input = scanner.nextInt();
+            switch (input) {
                 case 1:
                     System.out.println("There are the available books!");
-                    for (Book b: books) {
-                        if(!b.isCheckedOut()){
-                        System.out.println("ID: " + b.getId() + ", ISBN: " + b.getIsbn() + ", Title0: " + b.getTitle());
+                    for (Book b : books) {
+                        if (!b.isCheckedOut()) {
+                            System.out.println("ID: " + b.getId() + ", ISBN: " + b.getIsbn() + ", Title0: " + b.getTitle());
                         }
                     }
                     System.out.println("Please enter the book id you would like to check out or enter 0 ");
                     System.out.println("to go back to the home screen");
                     int checkOutID = scanner.nextInt();
 
-                    if (checkOutID > 0 && checkOutID <= books.length){
+                    if (checkOutID > 0 && checkOutID <= books.length) {
                         if (!books[checkOutID - 1].isCheckedOut()) { //20th book but at 19th index
                             System.out.print("Enter your name: ");
                             String name = scanner.nextLine();
@@ -60,7 +62,11 @@ public class Main {
                         } else {
                             System.out.println("Book is already checked out.");
                         }
+                    } else {
+                        System.out.println("invalid book id");
                     }
+                    if (checkOutID == 0) {
+                        break;
                     }
 
 
@@ -70,11 +76,11 @@ public class Main {
 
                     break;
                 case 3:
-
+                    programRunning = false;
                     break;
 
-
             }
+        }
 
 
 
