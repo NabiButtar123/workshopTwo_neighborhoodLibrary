@@ -1,23 +1,29 @@
+package com.ps;
+
 public class Book {
     private int id;
     private String isbn;
     private String title;
     private boolean isCheckedOut;
-    private String checkedOut;
+    private String checkedOutTo;
 
-    public Book(int id, String isbn, String title, boolean isCheckedOut, String checkedOut) {
+    public Book(int id, String isbn, String title) {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
-        this.isCheckedOut = isCheckedOut;
-        this.checkedOut = checkedOut;
+        this.isCheckedOut = false;
+        this.checkedOutTo = "";
     }
     public void checkOut(String name) {
-
+        this.isCheckedOut = true;
+        this.checkedOutTo = name;
     }
     public void checkIn() {
-
+        this.isCheckedOut = false;
+        this.checkedOutTo = "";
     }
+
+
     public int getId() {
         return id;
     }
@@ -42,19 +48,20 @@ public class Book {
         this.title = title;
     }
 
-    public boolean isCheckedOut() {
+    public boolean isCheckedOut(){
         return isCheckedOut;
     }
-
-    public void setCheckedOut(boolean checkedOut) {
-        isCheckedOut = checkedOut;
+    //who the person is that checked out that book
+    public String getCheckedOutTo() {
+        return checkedOutTo;
     }
 
-    public String getCheckedOut() {
-        return checkedOut;
-    }
-
-    public void setCheckedOut(String checkedOut) {
-        this.checkedOut = checkedOut;
+    public void setCheckedOutTo(String checkedOutTo) {
+        this.checkedOutTo = checkedOutTo;
     }
 }
+
+
+
+
+
