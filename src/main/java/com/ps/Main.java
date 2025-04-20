@@ -49,26 +49,54 @@ public class Main {
                             System.out.println("ID: " + b.getId() + ", ISBN: " + b.getIsbn() + ", Title0: " + b.getTitle());
                         }
                     }
-                    System.out.println("Please enter the book id you would like to check out or enter 0 ");
-                    System.out.println("to go back to the home screen");
-                    int checkOutID = scanner.nextInt();
 
-                    if (checkOutID > 0 && checkOutID <= books.length) {
-                        if (!books[checkOutID - 1].isCheckedOut()) { //20th book but at 19th index
-                            System.out.print("Enter your name: ");
-                            String name = scanner.nextLine();
-                            books[checkOutID - 1].checkOut(name);
-                            System.out.println("Book checked out!");
-                        } else {
-                            System.out.println("Book is already checked out.");
+                    boolean stayBookMenu = true;
+
+                    while (stayBookMenu) {
+                        System.out.println("Please enter the book id you would like to check out or enter 0 ");
+                        System.out.println("to go back to the home screen");
+                        int checkOutID = scanner.nextInt();
+
+                        if (checkOutID == 0) {
+                            stayBookMenu = false;
+
                         }
-                    } else {
-                        System.out.println("invalid book id");
-                    }
-                    if (checkOutID == 0) {
-                        break;
-                    }
 
+                        if (checkOutID > 0 && checkOutID <= books.length) {
+                            if (!books[checkOutID - 1].isCheckedOut()) { //20th book but at 19th index
+                                System.out.print("Enter your name: ");
+                                String name = scanner.nextLine();
+                                books[checkOutID - 1].checkOut(name);
+                                System.out.println("Book checked out!");
+                            } else {
+                                System.out.println("Book is already checked out.");
+                            }
+                        } else {
+                            System.out.println("invalid book id");
+                        }
+                    }
+                    System.out.println("Would you like to check another book? Enter as so: ");
+                    System.out.println("1. Check out another book");
+                    System.out.println("2. Return to the home screen");
+                    System.out.print("Enter your choice: ");
+                    int nextChoice = scanner.nextInt();
+
+                    switch (nextChoice) {
+                        case 1:
+                            // Show ID prompt again, but not full list
+                            stayBookMenu = true;
+                            break;
+                        case 2:
+                            System.out.println("Returning to the home screen ");
+                            stayBookMenu = false;
+                            break;
+                        default:
+                            System.out.println("Invalid choice, returning to main menu");
+                            stayBookMenu = false;
+                            break;
+                    }
+            }
+                    break;
 
                 case 2:
                     System.out.println("Please enter 'C' to check in a book ");
