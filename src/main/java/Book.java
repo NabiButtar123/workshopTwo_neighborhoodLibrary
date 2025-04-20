@@ -12,7 +12,12 @@ public class Book {
         this.isCheckedOut = isCheckedOut;
         this.checkedOut = checkedOut;
     }
+    public void checkOut(String name) {
 
+    }
+    public void checkIn() {
+
+    }
     public int getId() {
         return id;
     }
