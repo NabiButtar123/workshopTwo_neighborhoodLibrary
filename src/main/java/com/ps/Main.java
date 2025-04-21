@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
 
 
@@ -33,7 +34,7 @@ public class Main {
 
         boolean programRunning = true;
 
-        while(programRunning) {
+        while (programRunning) {
             System.out.println("----------------------------------------------------------------------");
             System.out.println("Hello! Welcome to the library please choose one of the options below!");
             System.out.println("Hello! enter 1 to Show Available books");
@@ -63,6 +64,7 @@ public class Main {
                         }
 
                         if (checkOutID > 0 && checkOutID <= books.length) {
+                            // if false
                             if (!books[checkOutID - 1].isCheckedOut()) { //20th book but at 19th index
                                 System.out.print("Enter your name: ");
                                 String name = scanner.nextLine();
@@ -96,28 +98,72 @@ public class Main {
                             break;
                     }
             }
-                    break;
+            break;
 
-                case 2:
-                    System.out.println("Please enter 'C' to check in a book ");
-                    System.out.println("Please enter 'X' to go back to home screen");
+            case 2: //showing checked out books
+                System.out.println("Checked Out Books:");
+                for (Book b : books) {
+                    if (b.isCheckedOut()) {
+                        System.out.println("ID: " + b.getId() + ", ISBN: "
+                                + b.getIsbn() + ", Title: " + b.getTitle() + ", Checked Out To: " + b.getCheckedOutTo());
+                    }
+                }
+                System.out.println("Please enter 'C' to check in a book ");
+                System.out.println("Please enter 'X' to go back to home screen");
+                char inputCheckin = scanner.nextLine().toUpperCase().charAt(0);
 
-                    break;
-                case 3:
-                    programRunning = false;
-                    break;
+                switch (inputCheckin) {
+                    case 'C':
+                        boolean stayCheckIn = true;
 
+                        while (stayCheckIn) {
+                            System.out.println("Please enter book id");
+                            int checkInID = scanner.nextInt();
+
+                            if (checkInID == 0 && checkInID <= books.length) {
+                                System.out.println("Returning to the home screen ");
+                                stayCheckIn = false;
+                                break;
+                            }
+
+                            if (checkInID > 0 && checkInID <= books.length) {
+                                Book checkInBook = books[checkInID - 1];
+                                if (checkInBook.isCheckedOut()) {
+                                    checkInBook.checkIn();
+                                    System.out.println("Book has been checked in!");
+                                } else {
+                                    System.out.println("That book is not checked in");
+                                }
+                                System.out.println("Enter 'C' to check in another book or 'X  to return to main menu");
+
+                                char anotherInputCheck = scanner.nextLine().toUpperCase().charAt(0);
+
+                                if (anotherInputCheck == 'C') {
+                                    stayCheckIn = true;
+                                } else {
+                                    stayCheckIn = false;
+                                    System.out.println("Returning to main menu");
+                                }
+                            }
+                        }
+                        break;
+                    case 'X':
+                        System.out.println("Returning to main menu ");
+                        break;
+                    default:
+                        System.out.println("invalid input going back to home screen");
+                        break;
+                }
+                break;
+            case 3:
+                programRunning = false;
+                System.out.println("Thank you for visiting the library please come again soon!");
+                break;
+
+                        }
             }
         }
-
-
-
-
-
-
-        }
-
-
-
     }
 }
+
+
